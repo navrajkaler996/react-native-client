@@ -1,7 +1,7 @@
 import { ScrollView, View } from "react-native";
 
 import Divider from "../../components/Divider";
-import Discussion from "../../components/Discussion";
+import Discussion from "./Discussion";
 
 const discussionsData = [
   {
@@ -40,7 +40,7 @@ const discussionsData = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sed facilisis diam. Sed quis dolor at metus pharetra porttitor. Aliquamerat volutpat. Nulla ornare nunc vel felis dignissim, et sodales metus faucibus. Proin porttitor mi sed volutpat porttitor. Quisque sit amet mauris a odio porttitor congue.",
   },
 ];
-
+//Displays a list of discussions
 const DiscussionsList = () => {
   return (
     <ScrollView

@@ -3,8 +3,9 @@ import { StyleSheet, View, Text } from "react-native";
 import { EvilIcons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 
-import { COLORS } from "../utils/constants";
+import { COLORS } from "../../utils/constants";
 
+//Displays a single discussion
 const Discussion = ({ discussion }) => {
   return (
     <View

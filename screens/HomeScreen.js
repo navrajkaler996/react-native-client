@@ -2,7 +2,7 @@ import React from "react";
 import { View, StyleSheet, Text, TextInput } from "react-native";
 import { COLORS } from "../utils/constants";
 import RoundButton from "../components/RoundButton";
-import DiscussionView from "../components/Discussion";
+import DiscussionView from "./components/Discussion";
 import Divider from "../components/Divider";
 import DiscussionsList from "./components/DiscussionsList";
 
