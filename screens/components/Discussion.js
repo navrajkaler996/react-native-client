@@ -2,6 +2,8 @@ import { StyleSheet, View, Text } from "react-native";
 
 import { EvilIcons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 
 import { COLORS } from "../../utils/constants";
 
@@ -61,13 +63,31 @@ const Discussion = ({ discussion }) => {
           style={DiscussionStyles["discussion-view-description"]}>
           {discussion.description}
         </Text>
+        <View
+          id="discussion-view-response"
+          style={DiscussionStyles["discussion-view-response-conatiner"]}>
+          <View
+            id="discussion-view-response-like"
+            style={DiscussionStyles["discussion-view-response"]}>
+            <AntDesign name="like2" size={20} color="black" />
+            <Text>21 </Text>
+          </View>
+          <View style={DiscussionStyles["discussion-view-response"]}>
+            <FontAwesome5 name="comment-alt" size={18} color="black" />
+            <Text>21 </Text>
+          </View>
+          <View style={DiscussionStyles["discussion-view-response"]}>
+            <AntDesign name="dislike2" size={20} color="black" />
+            <Text>21 </Text>
+          </View>
+        </View>
       </View>
     </View>
   );
 };
 
 const DiscussionStyles = StyleSheet.create({
-  "discussion-view-container": { marginTop: 12, marginBottom: 12 },
+  "discussion-view-container": { marginTop: 10, marginBottom: 10 },
   "discussion-view-container-1": {
     position: "relative",
   },
@@ -94,8 +114,8 @@ const DiscussionStyles = StyleSheet.create({
   },
   "discussion-view-container-2": {
     paddingLeft: 10,
-    marginTop: 10,
-    marginBottom: 10,
+    marginTop: 4,
+    marginBottom: 4,
   },
   "discussion-view-title": {
     fontSize: 16,
@@ -106,6 +126,21 @@ const DiscussionStyles = StyleSheet.create({
   },
   "discussion-view-description": {
     fontSize: 12,
+    marginBottom: 6,
+  },
+  "discussion-view-response-conatiner": {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-around",
+    // borderWidth: 0.5,
+    borderColor: "#ddd",
+    gap: 5,
+    width: "fit-content",
+  },
+  "discussion-view-response": {
+    flexDirection: "row",
+    alignItems: "baseline",
+    gap: 5,
   },
 });
 

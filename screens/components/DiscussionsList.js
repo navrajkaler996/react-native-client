@@ -47,9 +47,9 @@ const DiscussionsList = () => {
       id="discussions"
       contentContainerStyle={{ flexGrow: 1 }}
       showsHorizontalScrollIndicator={false}>
-      {discussionsData?.map((discussion) => {
+      {discussionsData?.map((discussion, i) => {
         return (
-          <View>
+          <View key={i}>
             <Divider />
             <Discussion discussion={discussion} />
           </View>
