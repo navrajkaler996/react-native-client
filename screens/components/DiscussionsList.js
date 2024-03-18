@@ -41,7 +41,7 @@ const discussionsData = [
   },
 ];
 //Displays a list of discussions
-const DiscussionsList = () => {
+const DiscussionsList = ({ pressHandler }) => {
   return (
     <ScrollView
       id="discussions"
@@ -51,7 +51,7 @@ const DiscussionsList = () => {
         return (
           <View key={i}>
             <Divider />
-            <Discussion discussion={discussion} />
+            <Discussion discussion={discussion} pressHandler={pressHandler} />
           </View>
         );
       })}

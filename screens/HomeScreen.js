@@ -6,7 +6,10 @@ import DiscussionView from "./components/Discussion";
 import Divider from "../components/Divider";
 import DiscussionsList from "./components/DiscussionsList";
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
+  function pressHandler() {
+    navigation.navigate("DiscussionOverviewScreen");
+  }
   return (
     <View style={styles.root}>
       <Text id="primary-heading-1" style={styles["primary-heading-1"]}>
@@ -30,7 +33,7 @@ const HomeScreen = () => {
         <RoundButton styles={{ height: 40, width: 40 }} />
       </View>
 
-      <DiscussionsList />
+      <DiscussionsList pressHandler={pressHandler} />
     </View>
   );
 };

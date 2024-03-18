@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, Pressable } from "react-native";
 
 import { EvilIcons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
@@ -8,11 +8,12 @@ import { AntDesign } from "@expo/vector-icons";
 import { COLORS } from "../../utils/constants";
 
 //Displays a single discussion
-const Discussion = ({ discussion }) => {
+const Discussion = ({ discussion, pressHandler }) => {
   return (
-    <View
+    <Pressable
       id="discussion-view-container"
-      style={DiscussionStyles["discussion-view-container"]}>
+      style={DiscussionStyles["discussion-view-container"]}
+      onPress={pressHandler}>
       <View
         id="discussion-view-container-1"
         style={DiscussionStyles["discussion-view-container-1"]}>
@@ -82,7 +83,7 @@ const Discussion = ({ discussion }) => {
           </View>
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 };
 
