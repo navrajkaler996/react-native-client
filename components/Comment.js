@@ -1,7 +1,9 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 
+import { AntDesign } from "@expo/vector-icons";
 import { EvilIcons } from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
 import { COLORS } from "../utils/constants";
 
 const Comment = ({ comment }) => {
@@ -36,12 +38,35 @@ const Comment = ({ comment }) => {
           {comment.text}
         </Text>
       </View>
+      <View
+        id="comment-reactions-container"
+        style={commentStyles["comment-reactions-container"]}>
+        <View
+          id="comment-reaction-like"
+          style={commentStyles["comment-reaction-like"]}>
+          <AntDesign name="like2" size={16} color="black" />
+          <Text style={{ fontSize: 12 }}>21 </Text>
+        </View>
+        <View style={commentStyles["comment-reaction-like"]}>
+          <FontAwesome5 name="comment-alt" size={14} color="black" />
+          <Text style={{ fontSize: 12 }}>21 </Text>
+        </View>
+        <View
+          id="comment-reaction-dislike"
+          style={commentStyles["comment-reaction-dislike"]}>
+          <AntDesign name="dislike2" size={16} color="black" />
+          <Text style={{ fontSize: 12 }}>21 </Text>
+        </View>
+      </View>
     </View>
   );
 };
 
 const commentStyles = StyleSheet.create({
-  "comment-container": {},
+  "comment-container": {
+    position: "relative",
+    marginBottom: 6,
+  },
   "comment-view-info-container": {
     flexDirection: "row",
     alignItems: "center",
@@ -59,9 +84,23 @@ const commentStyles = StyleSheet.create({
     color: COLORS["text-gray-1"],
   },
   "comment-description": {
-    fontSize: 10,
+    fontSize: 12,
     paddingLeft: 12,
     paddingRight: 12,
+  },
+  "comment-reactions-container": {
+    flexDirection: "row",
+    marginTop: 8,
+    marginLeft: 12,
+    gap: 12,
+  },
+  "comment-reaction-like": {
+    flexDirection: "row",
+    gap: 5,
+  },
+  "comment-reaction-dislike": {
+    flexDirection: "row",
+    gap: 5,
   },
 });
 
