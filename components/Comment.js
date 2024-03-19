@@ -1,5 +1,11 @@
-import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  View,
+  Text,
+  Pressable,
+  TouchableOpacity,
+} from "react-native";
 
 import { AntDesign } from "@expo/vector-icons";
 import { EvilIcons } from "@expo/vector-icons";
@@ -7,6 +13,46 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { COLORS } from "../utils/constants";
 
 const Comment = ({ comment }) => {
+  const [reactions, setReactions] = useState({
+    likes: 0,
+    dislikes: 0,
+    liked: false,
+    disliked: false,
+  });
+
+  useState(() => {
+    const reactions = {
+      likes: comment.likes,
+      dislikes: comment.dislikes,
+    };
+    setReactions(reactions);
+  }, []);
+
+  const likePressHandler = () => {
+    const likes = reactions.likes + 1;
+
+    setReactions({
+      ...reactions,
+      likes: likes,
+      dislikes: reactions.disliked
+        ? reactions.dislikes + 1
+        : reactions.dislikes,
+      liked: true,
+      disliked: false,
+    });
+  };
+
+  const dislikePressHandler = () => {
+    const dislikes = reactions.dislikes - 1;
+    setReactions({
+      ...reactions,
+      likes: reactions.likes ? reactions.likes - 1 : reactions.likes,
+      dislikes: dislikes,
+      disliked: true,
+      liked: false,
+    });
+  };
+
   return (
     <View id="comment-container" style={commentStyles["comment-container"]}>
       <View
@@ -44,8 +90,18 @@ const Comment = ({ comment }) => {
         <View
           id="comment-reaction-like"
           style={commentStyles["comment-reaction-like"]}>
-          <AntDesign name="like2" size={16} color="black" />
-          <Text style={{ fontSize: 12 }}>21 </Text>
+          <TouchableOpacity
+            onPress={likePressHandler}
+            disabled={reactions.liked}
+            style={{ padding: "5px 20px" }}>
+            <AntDesign
+              name="like2"
+              size={18}
+              color="black"
+              style={reactions.liked ? { color: "blue" } : {}}
+            />
+          </TouchableOpacity>
+          <Text style={{ fontSize: 12 }}>{reactions.likes} </Text>
         </View>
         <View style={commentStyles["comment-reaction-like"]}>
           <FontAwesome5 name="comment-alt" size={14} color="black" />
@@ -54,8 +110,18 @@ const Comment = ({ comment }) => {
         <View
           id="comment-reaction-dislike"
           style={commentStyles["comment-reaction-dislike"]}>
-          <AntDesign name="dislike2" size={16} color="black" />
-          <Text style={{ fontSize: 12 }}>21 </Text>
+          <TouchableOpacity
+            onPress={dislikePressHandler}
+            disabled={reactions.disliked}
+            style={{ padding: "5px 20px" }}>
+            <AntDesign
+              name="dislike2"
+              size={18}
+              color="black"
+              style={reactions.disliked ? { color: "blue" } : {}}
+            />
+          </TouchableOpacity>
+          <Text style={{ fontSize: 12 }}>{reactions.dislikes} </Text>
         </View>
       </View>
     </View>
@@ -90,6 +156,8 @@ const commentStyles = StyleSheet.create({
   },
   "comment-reactions-container": {
     flexDirection: "row",
+    alignItems: "center",
+
     marginTop: 8,
     marginLeft: 12,
     gap: 12,

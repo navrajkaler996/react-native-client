@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { COLORS } from "../utils/constants";
 import Discussion from "./components/Discussion";
-import Comment from "../components/Comment";
+
 import CommentSection from "../components/CommentSection";
 
 const discussion = {
@@ -15,36 +15,54 @@ const comments = [
   {
     name: "abc",
     text: "Lorem ipsum dolor sit amet",
+    likes: 13,
+    dislikes: 21,
+
     replies: [
       {
         name: "xyz",
         text: "Lorem ipsum dolor sit amet",
+        likes: 9,
+        dislikes: 1,
       },
       {
         name: "xyz",
         text: "Lorem ipsum dolor sit amet",
+        likes: 10,
+        dislikes: 2,
       },
       {
         name: "xyz",
         text: "Lorem ipsum dolor sit amet",
+        likes: 3,
+        dislikes: 1,
       },
     ],
   },
   {
     name: "abc",
     text: "Lorem ipsum dolor sit amet",
+    likes: 13,
+    dislikes: 21,
+
     replies: [
       {
         name: "xyz",
         text: "Lorem ipsum dolor sit amet",
+        likes: 3,
+        dislikes: 0,
       },
       {
         name: "xyz",
         text: "Lorem ipsum dolor sit amet",
+        likes: 11,
+        dislikes: 2,
       },
       {
         name: "xyz",
         text: "Lorem ipsum dolor sit amet",
+        likes: 9,
+        dislikes: 2,
       },
     ],
   },
