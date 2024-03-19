@@ -52,7 +52,8 @@ const CommentSection = ({ comments }) => {
                 return (
                   <View
                     id="comment-replies"
-                    style={commentSectionStyles["comment-replies"]}>
+                    style={commentSectionStyles["comment-replies"]}
+                    key={i}>
                     <Comment comment={reply} />
                   </View>
                 );

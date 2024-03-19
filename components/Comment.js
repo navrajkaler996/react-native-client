@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  View,
-  Text,
-  Pressable,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 
 import { AntDesign } from "@expo/vector-icons";
 import { EvilIcons } from "@expo/vector-icons";
@@ -98,13 +92,18 @@ const Comment = ({ comment }) => {
               name="like2"
               size={18}
               color="black"
-              style={reactions.liked ? { color: "blue" } : {}}
+              style={reactions.liked ? { color: COLORS.primary } : {}}
             />
           </TouchableOpacity>
           <Text style={{ fontSize: 12 }}>{reactions.likes} </Text>
         </View>
         <View style={commentStyles["comment-reaction-like"]}>
-          <FontAwesome5 name="comment-alt" size={14} color="black" />
+          <TouchableOpacity
+            // onPress={dislikePressHandler}
+            disabled={reactions.disliked}
+            style={{ padding: "5px 20px" }}>
+            <FontAwesome5 name="comment-alt" size={14} color="black" />
+          </TouchableOpacity>
           <Text style={{ fontSize: 12 }}>21 </Text>
         </View>
         <View
@@ -118,7 +117,7 @@ const Comment = ({ comment }) => {
               name="dislike2"
               size={18}
               color="black"
-              style={reactions.disliked ? { color: "blue" } : {}}
+              style={reactions.disliked ? { color: COLORS.primary } : {}}
             />
           </TouchableOpacity>
           <Text style={{ fontSize: 12 }}>{reactions.dislikes} </Text>
@@ -156,7 +155,8 @@ const commentStyles = StyleSheet.create({
   },
   "comment-reactions-container": {
     flexDirection: "row",
-    alignItems: "center",
+    // alignItems: "center",
+    alignItems: "baseline",
 
     marginTop: 8,
     marginLeft: 12,
@@ -164,10 +164,12 @@ const commentStyles = StyleSheet.create({
   },
   "comment-reaction-like": {
     flexDirection: "row",
+    alignItems: "baseline",
     gap: 5,
   },
   "comment-reaction-dislike": {
     flexDirection: "row",
+    alignItems: "baseline",
     gap: 5,
   },
 });

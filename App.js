@@ -11,7 +11,6 @@ import { Feather } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
 
 const Stack = createStackNavigator();
-const Drawer = createDrawerNavigator();
 
 export default function App() {
   return (

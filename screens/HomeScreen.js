@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, StyleSheet, Text, TextInput } from "react-native";
-import { COLORS } from "../utils/constants";
 import RoundButton from "../components/RoundButton";
-import DiscussionView from "./components/Discussion";
-import Divider from "../components/Divider";
 import DiscussionsList from "./components/DiscussionsList";
+import { COLORS } from "../utils/constants";
+import { discussionsList as data } from "../data/data";
 
 const HomeScreen = ({ navigation }) => {
-  function pressHandler() {
-    navigation.navigate("DiscussionOverviewScreen");
+  const [discussionsList, setDiscussionsList] = useState([]);
+
+  useState(() => {
+    setDiscussionsList(data);
+  }, []);
+
+  function pressHandler(discussion) {
+    navigation.navigate("DiscussionOverviewScreen", {
+      discussion,
+    });
   }
   return (
     <View style={styles.root}>
@@ -33,7 +40,10 @@ const HomeScreen = ({ navigation }) => {
         <RoundButton styles={{ height: 40, width: 40 }} />
       </View>
 
-      <DiscussionsList pressHandler={pressHandler} />
+      <DiscussionsList
+        pressHandler={pressHandler}
+        discussionsList={discussionsList}
+      />
     </View>
   );
 };

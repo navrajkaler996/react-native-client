@@ -41,13 +41,13 @@ const discussionsData = [
   },
 ];
 //Displays a list of discussions
-const DiscussionsList = ({ pressHandler }) => {
+const DiscussionsList = ({ pressHandler, discussionsList }) => {
   return (
     <ScrollView
       id="discussions"
       contentContainerStyle={{ flexGrow: 1 }}
       showsHorizontalScrollIndicator={false}>
-      {discussionsData?.map((discussion, i) => {
+      {discussionsList?.map((discussion, i) => {
         return (
           <View key={i}>
             <Divider />

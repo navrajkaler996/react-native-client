@@ -5,11 +5,11 @@ import Discussion from "./components/Discussion";
 
 import CommentSection from "../components/CommentSection";
 
-const discussion = {
-  title: "Work permit help needed",
-  description:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sed facilisis diam. Sed quis dolor at metus pharetra porttitor. Aliquamerat volutpat. Nulla ornare nunc vel felis dignissim, et sodales metus faucibus. Proin porttitor mi sed volutpat porttitor. Quisque sit amet mauris a odio porttitor congue.",
-};
+// const discussion = {
+//   title: "Work permit help needed",
+//   description:
+//     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sed facilisis diam. Sed quis dolor at metus pharetra porttitor. Aliquamerat volutpat. Nulla ornare nunc vel felis dignissim, et sodales metus faucibus. Proin porttitor mi sed volutpat porttitor. Quisque sit amet mauris a odio porttitor congue.",
+// };
 
 const comments = [
   {
@@ -68,7 +68,8 @@ const comments = [
   },
 ];
 
-const DiscussionOverviewScreen = () => {
+const DiscussionOverviewScreen = ({ route }) => {
+  const { discussion } = route.params;
   return (
     <View
       id="discussion-overview-container"
@@ -83,8 +84,8 @@ const DiscussionOverviewScreen = () => {
         style={discussionOverviewStyles["discussion-overview-info"]}>
         Discussion by xyz
       </Text> */}
-      <Discussion discussion={discussion} />
-      <CommentSection comments={comments} />
+      <Discussion discussion={discussion} pressHandler={null} />
+      <CommentSection comments={discussion.comments} />
     </View>
   );
 };

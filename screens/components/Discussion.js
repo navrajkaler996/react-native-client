@@ -1,4 +1,10 @@
-import { StyleSheet, View, Text, Pressable } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  Pressable,
+  TouchableOpacity,
+} from "react-native";
 
 import { EvilIcons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
@@ -6,14 +12,55 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 
 import { COLORS } from "../../utils/constants";
+import { useEffect, useState } from "react";
 
 //Displays a single discussion
 const Discussion = ({ discussion, pressHandler }) => {
+  const [reactions, setReactions] = useState({
+    likes: 0,
+    dislikes: 0,
+    liked: false,
+    disliked: false,
+  });
+
+  useEffect(() => {
+    const reactions = {
+      likes: discussion.likes,
+      dislikes: discussion.dislikes,
+    };
+    setReactions(reactions);
+  }, []);
+
+  const likePressHandler = () => {
+    const likes = reactions.likes + 1;
+
+    setReactions({
+      ...reactions,
+      likes: likes,
+      dislikes: reactions.disliked
+        ? reactions.dislikes + 1
+        : reactions.dislikes,
+      liked: true,
+      disliked: false,
+    });
+  };
+
+  const dislikePressHandler = () => {
+    const dislikes = reactions.dislikes - 1;
+    setReactions({
+      ...reactions,
+      likes: reactions.likes ? reactions.likes - 1 : reactions.likes,
+      dislikes: dislikes,
+      disliked: true,
+      liked: false,
+    });
+  };
   return (
     <Pressable
       id="discussion-view-container"
       style={DiscussionStyles["discussion-view-container"]}
-      onPress={pressHandler}>
+      onPress={() => pressHandler(discussion)}
+      disabled={pressHandler === null ? true : false}>
       <View
         id="discussion-view-container-1"
         style={DiscussionStyles["discussion-view-container-1"]}>
@@ -70,16 +117,36 @@ const Discussion = ({ discussion, pressHandler }) => {
           <View
             id="discussion-view-response-like"
             style={DiscussionStyles["discussion-view-response"]}>
-            <AntDesign name="like2" size={20} color="black" />
-            <Text>21 </Text>
+            <TouchableOpacity
+              onPress={likePressHandler}
+              disabled={reactions.liked}
+              style={{ padding: "5px 20px" }}>
+              <AntDesign
+                name="like2"
+                size={20}
+                color="black"
+                style={reactions.liked ? { color: COLORS.primary } : {}}
+              />
+            </TouchableOpacity>
+            <Text>{reactions.likes} </Text>
           </View>
           <View style={DiscussionStyles["discussion-view-response"]}>
             <FontAwesome5 name="comment-alt" size={18} color="black" />
             <Text>21 </Text>
           </View>
           <View style={DiscussionStyles["discussion-view-response"]}>
-            <AntDesign name="dislike2" size={20} color="black" />
-            <Text>21 </Text>
+            <TouchableOpacity
+              onPress={dislikePressHandler}
+              disabled={reactions.disliked}
+              style={{ padding: "5px 20px" }}>
+              <AntDesign
+                name="dislike2"
+                size={20}
+                color="black"
+                style={reactions.disliked ? { color: COLORS.primary } : {}}
+              />
+            </TouchableOpacity>
+            <Text>{reactions.dislikes} </Text>
           </View>
         </View>
       </View>
