@@ -32,8 +32,8 @@ const useDiscussion = (type, options) => {
         })
           .then((response) => response.json())
           .then((data) => {
-            if (data?.items) {
-              setData(data.items);
+            if (data?.Items) {
+              setData(data.Items);
               setLoading(false);
             }
           })

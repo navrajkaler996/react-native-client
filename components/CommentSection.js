@@ -35,6 +35,7 @@ const CommentSection = ({ comments }) => {
       {comments.map((comment, i) => {
         return (
           <View
+            key={i}
             id="comment-section"
             style={commentSectionStyles["comment-section"]}>
             <Comment comment={comment} />

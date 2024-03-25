@@ -120,7 +120,7 @@ const Discussion = ({ discussion, pressHandler }) => {
             <TouchableOpacity
               onPress={likePressHandler}
               disabled={reactions.liked}
-              style={{ padding: "5px 20px" }}>
+              style={{ padding: "10px 30px" }}>
               <AntDesign
                 name="like2"
                 size={20}
@@ -138,7 +138,7 @@ const Discussion = ({ discussion, pressHandler }) => {
             <TouchableOpacity
               onPress={dislikePressHandler}
               disabled={reactions.disliked}
-              style={{ padding: "5px 20px" }}>
+              style={{ padding: "10px 30px" }}>
               <AntDesign
                 name="dislike2"
                 size={20}
