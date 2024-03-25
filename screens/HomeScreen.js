@@ -1,22 +1,34 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, StyleSheet, Text, TextInput } from "react-native";
 import RoundButton from "../components/RoundButton";
 import DiscussionsList from "./components/DiscussionsList";
 import { COLORS } from "../utils/constants";
-import { discussionsList as data } from "../data/data";
+
+import useDiscussion from "../hooks/useDiscussion";
 
 const HomeScreen = ({ navigation }) => {
   const [discussionsList, setDiscussionsList] = useState([]);
 
-  useState(() => {
-    setDiscussionsList(data);
-  }, []);
+  const {
+    data: discussionsData,
+    loading: discussionsLoading,
+    error: discussionsError,
+  } = useDiscussion("GET_DISCUSSIONS_BY_COMMUNITY", {
+    params: { community: "winnipeg" },
+  });
+
+  useEffect(() => {
+    if (discussionsData?.length > 0) {
+      setDiscussionsList(discussionsData);
+    }
+  }, [discussionsData]);
 
   function pressHandler(discussion) {
     navigation.navigate("DiscussionOverviewScreen", {
       discussion,
     });
   }
+
   return (
     <View style={styles.root}>
       <Text id="primary-heading-1" style={styles["primary-heading-1"]}>
@@ -40,10 +52,12 @@ const HomeScreen = ({ navigation }) => {
         <RoundButton styles={{ height: 40, width: 40 }} />
       </View>
 
-      <DiscussionsList
-        pressHandler={pressHandler}
-        discussionsList={discussionsList}
-      />
+      {discussionsList?.length > 0 && (
+        <DiscussionsList
+          pressHandler={pressHandler}
+          discussionsList={discussionsList}
+        />
+      )}
     </View>
   );
 };
