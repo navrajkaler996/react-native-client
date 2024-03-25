@@ -4,9 +4,14 @@ import RoundButton from "../components/RoundButton";
 import DiscussionsList from "./components/DiscussionsList";
 import { COLORS } from "../utils/constants";
 import { discussionsList as data } from "../data/data";
+import useDiscussion from "../hooks/useDiscussion";
 
 const HomeScreen = ({ navigation }) => {
   const [discussionsList, setDiscussionsList] = useState([]);
+
+  const { data } = useDiscussion("GET_DISCUSSIONS_BY_COMMUNITY", {
+    params: { community: "winnipeg" },
+  });
 
   useState(() => {
     setDiscussionsList(data);
