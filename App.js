@@ -8,11 +8,15 @@ import DiscussionOverview from "./screens/DiscussionOverviewScreen";
 import DiscussionOverviewScreen from "./screens/DiscussionOverviewScreen";
 
 import { Feather } from "@expo/vector-icons";
-import { TouchableOpacity } from "react-native";
+import { Text, TouchableOpacity } from "react-native";
+import AddDiscussionScreen from "./screens/AddDiscussionScreen";
+import { useEffect, useState } from "react";
 
 const Stack = createStackNavigator();
 
 export default function App() {
+  const [isClicked, setIsClicked] = useState(false);
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -37,6 +41,27 @@ export default function App() {
           options={{
             headerTitle: "Overview",
           }}></Stack.Screen>
+
+        <Stack.Screen
+          name="AddDiscussionScreen"
+          // component={AddDiscussionScreen}
+          options={{
+            headerTitle: "Add discussion",
+            headerRight: () => (
+              <TouchableOpacity
+                style={{ marginRight: 10 }}
+                onPress={() => setIsClicked(true)}>
+                <Text style={{ fontWeight: "bold" }}>POST</Text>
+              </TouchableOpacity>
+            ),
+          }}>
+          {(props) => (
+            <AddDiscussionScreen
+              isClicked={isClicked}
+              setIsClicked={setIsClicked}
+            />
+          )}
+        </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );
