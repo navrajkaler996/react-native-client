@@ -4,8 +4,6 @@ import RoundButton from "../components/RoundButton";
 import DiscussionsList from "./components/DiscussionsList";
 import { COLORS } from "../utils/constants";
 
-import { AntDesign } from "@expo/vector-icons";
-
 import useDiscussion from "../hooks/useDiscussion";
 
 const HomeScreen = ({ navigation }) => {
@@ -36,7 +34,6 @@ const HomeScreen = ({ navigation }) => {
   }
 
   function addDiscussionPressHandler() {
-    console.log("aaa");
     navigation.navigate("AddDiscussionScreen");
   }
 
@@ -86,7 +83,7 @@ const styles = StyleSheet.create({
   root: {
     backgroundColor: "#fff",
     flex: 1,
-    alignItems: "center",
+    // alignItems: "center",
   },
   "primary-heading-1": {
     marginTop: 24,

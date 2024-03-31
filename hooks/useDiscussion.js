@@ -60,7 +60,6 @@ const useDiscussion = (type, options) => {
       url = director.getURL();
 
       if (url?.length > 0) {
-        console.log(url);
         let body = {};
         if (options.body) {
           body = options.body;

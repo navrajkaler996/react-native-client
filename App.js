@@ -44,7 +44,6 @@ export default function App() {
 
         <Stack.Screen
           name="AddDiscussionScreen"
-          // component={AddDiscussionScreen}
           options={{
             headerTitle: "Add discussion",
             headerRight: () => (

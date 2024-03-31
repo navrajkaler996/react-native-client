@@ -19,11 +19,29 @@ const AddDiscussionScreen = ({ isClicked, setIsClicked }) => {
   const { addDiscussion, requestStatus } = useDiscussion();
 
   useEffect(() => {
+    setNewDiscussion({
+      title: "",
+      description: "",
+      community: "winnipeg",
+      errors: {
+        title: false,
+        description: false,
+      },
+    });
     setIsClicked(false);
   }, []);
 
   useEffect(() => {
-    if (isClicked && newDiscussion.description.length !== 0) {
+    if (isClicked && newDiscussion.title?.length < 6) {
+      setNewDiscussion({
+        ...newDiscussion,
+        errors: {
+          ...newDiscussion.errors,
+          title: true,
+        },
+      });
+      setIsClicked(false);
+    } else if (isClicked && newDiscussion.title.length !== 0) {
       const body = createNewDiscussionBody(newDiscussion);
 
       if (body) {
@@ -56,7 +74,15 @@ const AddDiscussionScreen = ({ isClicked, setIsClicked }) => {
           onChangeText={(text) =>
             setNewDiscussion({ ...newDiscussion, title: text })
           }
+          placeholder="Enter a title..."
         />
+        {newDiscussion.errors.title && (
+          <Text style={addDiscussionStyles["title-error"]}>
+            {newDiscussion.title.length === 0
+              ? "Please enter a title"
+              : "Title should have atleast 6 characters"}
+          </Text>
+        )}
         <Text
           id="description-label"
           style={addDiscussionStyles["description-label"]}>
@@ -70,6 +96,7 @@ const AddDiscussionScreen = ({ isClicked, setIsClicked }) => {
           onChangeText={(text) =>
             setNewDiscussion({ ...newDiscussion, description: text })
           }
+          placeholder="optional"
         />
       </View>
     </View>
@@ -106,7 +133,7 @@ const addDiscussionStyles = StyleSheet.create({
     fontWeight: "bold",
     letterSpacing: 0.5,
 
-    paddingLeft: 10,
+    marginLeft: 5,
   },
   "title-input": {
     borderColor: "#ddd",
@@ -122,6 +149,7 @@ const addDiscussionStyles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
     letterSpacing: 0.5,
+    marginLeft: 5,
   },
 
   "description-input": {
@@ -133,6 +161,12 @@ const addDiscussionStyles = StyleSheet.create({
     borderRadius: 20,
     paddingTop: 10,
     paddingLeft: 10,
+  },
+
+  "title-error": {
+    paddingLeft: 10,
+    marginTop: 5,
+    color: "red",
   },
 });
 
