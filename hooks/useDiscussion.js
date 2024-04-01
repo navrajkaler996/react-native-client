@@ -5,7 +5,7 @@ const useDiscussion = (type, options) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [requestStatus, setRequestStatus] = useState([]);
+  const [requestResponse, setRequestResponse] = useState([]);
 
   useEffect(() => {
     if (type?.length > 0) {
@@ -86,11 +86,10 @@ const useDiscussion = (type, options) => {
               message: "Your discussion was posted successfully!",
             };
 
-            setRequestStatus(response);
+            setRequestResponse(response);
           }
         } catch (error) {
           // Handle the error
-
           console.error("Error:", error.message);
 
           const response = {
@@ -98,13 +97,13 @@ const useDiscussion = (type, options) => {
             message: "Error occurred! Please try again.",
           };
 
-          setRequestStatus(response);
+          setRequestResponse(response);
         }
       }
     }
   };
 
-  return { data, loading, error, addDiscussion, requestStatus };
+  return { data, loading, error, addDiscussion, requestResponse };
 };
 
 export default useDiscussion;

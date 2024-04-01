@@ -4,6 +4,7 @@ import { COLORS } from "../utils/constants";
 import { TextInput } from "react-native-gesture-handler";
 import useDiscussion from "../hooks/useDiscussion";
 import { createNewDiscussionBody } from "../utils/helpers";
+import { useNavigation } from "@react-navigation/native";
 
 const AddDiscussionScreen = ({ isClicked, setIsClicked }) => {
   const [newDiscussion, setNewDiscussion] = useState({
@@ -16,7 +17,9 @@ const AddDiscussionScreen = ({ isClicked, setIsClicked }) => {
     },
   });
 
-  const { addDiscussion, requestStatus } = useDiscussion();
+  const { addDiscussion, requestResponse } = useDiscussion();
+
+  const navigation = useNavigation();
 
   useEffect(() => {
     setNewDiscussion({
@@ -51,6 +54,22 @@ const AddDiscussionScreen = ({ isClicked, setIsClicked }) => {
       }
     }
   }, [isClicked]);
+
+  useEffect(() => {
+    if (isClicked && requestResponse) {
+      if (requestResponse.statusCode === 200) {
+        const discussion = {
+          title: newDiscussion.title,
+          description: newDiscussion.description,
+          community: "winnipeg",
+          comments: [],
+          likes: 0,
+          dislikes: 0,
+        };
+        navigation.navigate("DiscussionOverviewScreen", { discussion });
+      }
+    }
+  }, [requestResponse]);
 
   return (
     <View
