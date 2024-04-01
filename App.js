@@ -8,9 +8,12 @@ import DiscussionOverview from "./screens/DiscussionOverviewScreen";
 import DiscussionOverviewScreen from "./screens/DiscussionOverviewScreen";
 
 import { Feather } from "@expo/vector-icons";
-import { Text, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import AddDiscussionScreen from "./screens/AddDiscussionScreen";
 import { useEffect, useState } from "react";
+
+import { Ionicons } from "@expo/vector-icons";
+import { COLORS } from "./utils/constants";
 
 const Stack = createStackNavigator();
 
@@ -38,9 +41,30 @@ export default function App() {
         <Stack.Screen
           name="DiscussionOverviewScreen"
           component={DiscussionOverview}
-          options={{
+          options={({ navigation }) => ({
             headerTitle: "Overview",
-          }}></Stack.Screen>
+            headerLeft: () => (
+              <TouchableOpacity
+                onPress={() => navigation.navigate("Home")}
+                style={appStyles["home-button"]}>
+                <Ionicons
+                  name="chevron-back-outline"
+                  size={24}
+                  color={COLORS["primary"]}
+                />
+                <Text
+                  style={{
+                    backgroundColor: COLORS.primary,
+                    paddingLeft: 4,
+                    paddingRight: 4,
+                    paddingTop: 2,
+                    paddingBottom: 2,
+                  }}>
+                  HOME
+                </Text>
+              </TouchableOpacity>
+            ),
+          })}></Stack.Screen>
 
         <Stack.Screen
           name="AddDiscussionScreen"
@@ -65,3 +89,11 @@ export default function App() {
     </NavigationContainer>
   );
 }
+
+const appStyles = StyleSheet.create({
+  "home-button": {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});

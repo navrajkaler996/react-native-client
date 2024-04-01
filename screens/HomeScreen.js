@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   root: {
     backgroundColor: "#fff",
     flex: 1,
-    // alignItems: "center",
+    alignItems: "center",
   },
   "primary-heading-1": {
     marginTop: 24,
