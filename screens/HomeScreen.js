@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, Text, TextInput } from "react-native";
+import { View, StyleSheet, Text, TextInput, Animated } from "react-native";
 import RoundButton from "../components/RoundButton";
 import DiscussionsList from "./components/DiscussionsList";
 import { COLORS } from "../utils/constants";
@@ -8,6 +8,10 @@ import useDiscussion from "../hooks/useDiscussion";
 
 const HomeScreen = ({ navigation }) => {
   const [discussionsList, setDiscussionsList] = useState([]);
+  const [newDiscussion, setNewDiscussion] = useState("");
+  const [inputFocused, setInputFocused] = useState(false);
+
+  const heightAnim = new Animated.Value(40);
 
   const {
     data: discussionsData,
@@ -29,6 +33,19 @@ const HomeScreen = ({ navigation }) => {
     });
   }
 
+  function addDiscussionPressHandler() {
+    navigation.navigate("AddDiscussionScreen");
+  }
+
+  const handleBlur = () => {
+    setInputFocused(false);
+    Animated.timing(heightAnim, {
+      toValue: 40,
+      duration: 200, // Adjust the duration as needed
+      useNativeDriver: false,
+    }).start();
+  };
+
   return (
     <View style={styles.root}>
       <Text id="primary-heading-1" style={styles["primary-heading-1"]}>
@@ -43,13 +60,13 @@ const HomeScreen = ({ navigation }) => {
       <View
         id="discussion-input-container"
         style={styles["discussion-input-container"]}>
-        <TextInput
-          id="userInput"
-          value="Enter a discussion..."
-          style={styles.userInput}
+        <RoundButton type="FILTER" styles={{ height: 40, width: "33%" }} />
+        <RoundButton
+          type="ADD"
+          styles={{ height: 40, width: "33%" }}
+          pressHandler={addDiscussionPressHandler}
         />
-
-        <RoundButton styles={{ height: 40, width: 40 }} />
+        <RoundButton type="SEARCH" styles={{ height: 40, width: "33%" }} />
       </View>
 
       {discussionsList?.length > 0 && (
@@ -80,7 +97,7 @@ const styles = StyleSheet.create({
   "discussion-input-container": {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
     width: "100%",
     marginBottom: 24,
   },
@@ -93,7 +110,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     fontSize: 14,
     paddingLeft: 8,
-    color: "#BABABA",
   },
 });
 

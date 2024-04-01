@@ -8,6 +8,12 @@ class GetDiscussionsByCommunityURLBuilder {
   }
 }
 
+class AddDiscussionURLBuilder {
+  buildUrl(options) {
+    return `${API_HOST}/add-discussion`;
+  }
+}
+
 export class urlDirector {
   type;
   options;
@@ -25,6 +31,9 @@ export class urlDirector {
     switch (this.type) {
       case "GET_DISCUSSIONS_BY_COMMUNITY":
         urlBuilder = new GetDiscussionsByCommunityURLBuilder();
+        break;
+      case "ADD_DISCUSSION":
+        urlBuilder = new AddDiscussionURLBuilder();
         break;
       default:
         throw new Error("Invalid type");

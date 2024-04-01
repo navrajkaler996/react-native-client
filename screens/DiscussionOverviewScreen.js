@@ -79,11 +79,7 @@ const DiscussionOverviewScreen = ({ route }) => {
         style={discussionOverviewStyles["discussion-overview-heading"]}>
         Winnipeg
       </Text>
-      {/* <Text
-        id="discussion-overview-info"
-        style={discussionOverviewStyles["discussion-overview-info"]}>
-        Discussion by xyz
-      </Text> */}
+
       <Discussion discussion={discussion} pressHandler={null} />
       <CommentSection comments={discussion.comments} />
     </View>
