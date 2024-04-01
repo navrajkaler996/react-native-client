@@ -5,6 +5,7 @@ import { TextInput } from "react-native-gesture-handler";
 import useDiscussion from "../hooks/useDiscussion";
 import { createNewDiscussionBody } from "../utils/helpers";
 import { useNavigation } from "@react-navigation/native";
+import Loader from "../components/Loader";
 
 const AddDiscussionScreen = ({ isClicked, setIsClicked }) => {
   const [newDiscussion, setNewDiscussion] = useState({
@@ -17,7 +18,7 @@ const AddDiscussionScreen = ({ isClicked, setIsClicked }) => {
     },
   });
 
-  const { addDiscussion, requestResponse } = useDiscussion();
+  const { addDiscussion, loading, requestResponse } = useDiscussion();
 
   const navigation = useNavigation();
 
@@ -70,6 +71,10 @@ const AddDiscussionScreen = ({ isClicked, setIsClicked }) => {
       }
     }
   }, [requestResponse]);
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <View
