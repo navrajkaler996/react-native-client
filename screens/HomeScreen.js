@@ -5,6 +5,7 @@ import DiscussionsList from "./components/DiscussionsList";
 import { COLORS } from "../utils/constants";
 
 import useDiscussion from "../hooks/useDiscussion";
+import Loader from "../components/Loader";
 
 const HomeScreen = ({ navigation }) => {
   const [discussionsList, setDiscussionsList] = useState([]);
@@ -69,7 +70,9 @@ const HomeScreen = ({ navigation }) => {
         <RoundButton type="SEARCH" styles={{ height: 40, width: "33%" }} />
       </View>
 
-      {discussionsList?.length > 0 && (
+      {discussionsLoading && <Loader />}
+
+      {!discussionsLoading && discussionsList?.length > 0 && (
         <DiscussionsList
           pressHandler={pressHandler}
           discussionsList={discussionsList}

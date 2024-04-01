@@ -65,6 +65,8 @@ const useDiscussion = (type, options) => {
           body = options.body;
         }
 
+        setLoading(true);
+
         try {
           const response = await fetch(url, {
             method: "POST",
@@ -85,7 +87,7 @@ const useDiscussion = (type, options) => {
               statusCode: 200,
               message: "Your discussion was posted successfully!",
             };
-
+            setLoading(false);
             setRequestResponse(response);
           }
         } catch (error) {
@@ -96,7 +98,7 @@ const useDiscussion = (type, options) => {
             statusCode: 400,
             message: "Error occurred! Please try again.",
           };
-
+          setLoading(false);
           setRequestResponse(response);
         }
       }
